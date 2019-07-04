@@ -49,6 +49,27 @@ const mainStyle = StyleSheet.create({
         justifyContent: 'flex-start',
         borderBottomWidth: 1,
         borderBottomColor: '#f3f3f3'
+    },
+    TextInput: {
+        width: width - 30,
+        height: 40,
+        borderRadius: 10,
+        borderColor: '#eaeaea',
+        borderWidth: 1,
+        backgroundColor: '#fff',
+        paddingLeft: 10,
+        marginTop: 10
+    },
+    Input: {
+        width: width,
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        marginTop: 20
+    },
+    InputText: {
+        width: width - 30,
+        textAlign: 'left'
     }
 });
 
@@ -149,6 +170,15 @@ const globalStyle = StyleSheet.create({
     },
     mL25: {
         marginLeft: 25
+    },
+    Button: {
+        width: width - 30,
+        height: 50,
+        backgroundColor: 'tomato',
+        borderRadius: 10,
+        marginTop: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 

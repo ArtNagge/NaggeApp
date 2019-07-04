@@ -52,7 +52,7 @@ const TabNavigator = createBottomTabNavigator({
             },
             showLabel: false
         },
-        initialRouteName: "Home"}
+        initialRouteName: "Profile"}
 );
 
 const Navigation = createAppContainer(TabNavigator);

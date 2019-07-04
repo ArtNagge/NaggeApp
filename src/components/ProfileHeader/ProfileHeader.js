@@ -4,33 +4,38 @@ import {Image, Text, View} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Badge} from "react-native-elements";
 import BoxShadow from "react-native-shadow/lib/BoxShadow";
+import {observer} from 'mobx-react';
 
-const ProfileHeader = ({store, nav}) => {
-    return (
-        <BoxShadow setting={ shS.headerShadow }>
-            <View style={ mnS.header }>
-                <View style={ { flexDirection: 'row' } }>
-                    <View>
-                        <Image style={ glS.avaS } source={{uri: store.infoUser.img}}/>
-                        <Badge
-                            status="warning"
-                            value={120}
-                            containerStyle={{ position: 'absolute', top: -4, right: -4 }}
-                        />
+@observer
+class ProfileHeader extends React.Component {
+    render() {
+        const {store, nav} = this.props;
+        return (
+            <BoxShadow setting={ shS.headerShadow }>
+                <View style={ mnS.header }>
+                    <View style={ { flexDirection: 'row' } }>
+                        <View>
+                            <Image style={ glS.avaS } source={{uri: store.infoUser.img}}/>
+                            <Badge
+                                status="warning"
+                                value={120}
+                                containerStyle={{ position: 'absolute', top: -4, right: -4 }}
+                            />
+                        </View>
+                        <View style={ { marginLeft: 10 } }>
+                            <Text style={ glS.nickName }>
+                                {store.infoUser.name}
+                            </Text>
+                            <Text style={ glS.description }>
+                                {store.infoUser.description}
+                            </Text>
+                        </View>
                     </View>
-                    <View style={ { marginLeft: 10 } }>
-                        <Text style={ glS.nickName }>
-                            {store.infoUser.name}
-                        </Text>
-                        <Text style={ glS.description }>
-                            {store.infoUser.description}
-                        </Text>
-                    </View>
+                    <Icon name="cogs" size={24} color="#fff" onPress={() => nav.navigate('Settings')} />
                 </View>
-                <Icon name="cogs" size={24} color="#fff" onPress={() => nav.navigate('Settings')} />
-            </View>
-        </BoxShadow>
-    )
-};
+            </BoxShadow>
+        )
+    }
+}
 
 export default ProfileHeader;

@@ -22,8 +22,12 @@ class AppStore {
         ]
     };
 
-    @action changeInfoUser(user = Object) {
-        this.user = user
+    @action changeUserInfo(name = this.user.name, description = this.user.description) {
+        this.user = {
+            ...this.user,
+            name,
+            description
+        }
     }
 
     @computed get infoUser() {

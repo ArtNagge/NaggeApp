@@ -1,24 +1,32 @@
 import React, {Component} from 'react';
-import {View, Text, ScrollView, TouchableOpacity} from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { mnS, glS, shS } from '../styles';
-import BoxShadow from "react-native-shadow/lib/BoxShadow";
+import Input from "../components/Input";
+import {inject, observer} from 'mobx-react';
+import Button from "../components/Button";
+import Content from "../components/Content/Content";
+import BackHeader from "../components/BackHeader/BackHeader";
 
-export default class SettingsScreen extends Component {
-    render() {
-        return (
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{flexDirection: 'column', alignItems: 'center', paddingBottom: 30}} style={ glS.container } alwaysBounceVertical={false} bounces={false} snapToAlignment="center">
-                <BoxShadow setting={ shS.headerSettingShadow }>
-                    <View style={ mnS.mainHeaderSettings }>
-                        <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} activeOpacity={0.8} onPress={() => this.props.navigation.goBack()}>
-                            <Icon name="angle-left" size={30} color="#fff" />
-                            <Text style={ [ glS.mL10, glS.fw600, glS.f20, {color: '#fff'} ] }>
-                                Настройки
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </BoxShadow>
-            </ScrollView>
-        );
-    }
-}
+const SettingsScreen = inject("store")(
+    observer(
+        class Screen extends Component {
+
+            pressButton() {
+                this.props.store.changeUserInfo(this.name, this.desc);
+                this.props.navigation.goBack()
+            }
+
+            render() {
+                const {store} = this.props;
+                return (
+                    <Content>
+                        <BackHeader title={"Настройки"} callBack={() => this.props.navigation.goBack()} />
+                        <Input title="Имя" onChangeText={(text) => this.name = text} placeholder={store.user.name}/>
+                        <Input title="Описание" onChangeText={(text) => this.desc = text} placeholder={store.user.description}/>
+                        <Button title={"Сохраннить"} callBack={() => this.pressButton(this.name, this.desc)}/>
+                    </Content>
+                );
+            }
+        }
+    )
+);
+
+export default SettingsScreen
